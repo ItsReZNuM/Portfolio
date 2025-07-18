@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reza Mohamadnia | Tech Guy </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a" },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2a2a2a',
+                            600: '#3a3a3a',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .tech-icon {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Social button gradients */
+        .github-btn {
+            transition: all 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: linear-gradient(45deg, #333, #6e5494);
+            color: white;
+            border-color: transparent;
+        }
+
+        .telegram-btn {
+            transition: all 0.3s ease;
+        }
+
+        .telegram-btn:hover {
+            background: linear-gradient(45deg, #0088cc, #34b7f1);
+            color: white;
+            border-color: transparent;
+        }
+
+        .instagram-btn {
+            transition: all 0.3s ease;
+        }
+
+        .instagram-btn:hover {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-dark-900 dark:bg-gray-50 text-gray-300 dark:text-gray-800">
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full bg-dark-800/90 dark:bg-white/90 backdrop-blur-md z-50 border-b border-dark-700 dark:border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-2xl font-bold gradient-text">ReZNuM</span>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#home"
+                                class="text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-black px-3 py-2 rounded-md text-sm font-medium transition">Home</a>
+                            <a href="#about"
+                                class="text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-black px-3 py-2 rounded-md text-sm font-medium transition">About</a>
+                            <a href="#skills"
+                                class="text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-black px-3 py-2 rounded-md text-sm font-medium transition">Skills</a>
+                            <a href="#projects"
+                                class="text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-black px-3 py-2 rounded-md text-sm font-medium transition">Projects</a>
+                            <a href="#contact"
+                                class="text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-black px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button id="theme-toggle"
+                            class="p-1 rounded-full text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black focus:outline-none">
+                            <span class="sr-only">Toggle theme</span>
+                            <i class="fas fa-sun h-6 w-6"></i>
+                            <i class="fas fa-moon h-6 w-6 hidden"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button"
+                        class="bg-dark-700 dark:bg-gray-200 inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black hover:bg-dark-600 dark:hover:bg-gray-300 focus:outline-none"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    Hi, I'm <span class="gradient-text">Reza Mohamadnia</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-gray-400 dark:text-gray-600 mb-8">
+                    Backend Developer & Telegram Bot Creator
+                </h2>
+                <p class="text-lg text-gray-400 dark:text-gray-600 mb-8 max-w-lg">
+                    Interested in Programming Open Source Telegram Bots , and BackEnd Development Using Pythonm, FastAPI
+                    Additionally , Doing Scraping using python For both Fun and Work.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#contact"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium transition">
+                        Contact Me
+                    </a>
+                    <a href="#projects"
+                        class="px-6 py-3 border border-gray-700 dark:border-gray-300 hover:border-blue-500 rounded-md text-white dark:text-gray-800 font-medium transition">
+                        View Work
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -top-6 -left-6 w-full h-full border-2 border-blue-500 rounded-xl z-0"></div>
+                <div class="relative z-10">
+                    <img src="src/prof_pic.jpg" alt="Developer working" class="rounded-xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-dark-800 dark:bg-gray-200 rounded-xl">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="col-span-1">
+                <h3 class="text-2xl font-semibold mb-4">Who I Am</h3>
+                <p class="text-gray-400 dark:text-gray-600 mb-6">
+                    I'm Reza Mohamadnia , an 19 year old (Probably) Developer from Iran, specializing in backend
+                    development and Telegram bot creation. I have a passion for building efficient, scalable systems and
+                    creating bots that enhance user experiences.
+                    Sometimes just coding for fun and want to show that "I CAN DO SOMETHING".
+                    Started Programming at 115 , but very simple and not that good , But I was a computer guy at the
+                    moment I borned.
+                </p>
+                <p class="text-gray-400 dark:text-gray-600 mb-6">
+                    When I'm not coding, you can find me Playing [Online] video games , Such as CS2 or PUBG Mobile , But
+                    Interested in Offline ones too 😉
+                </p>
+            </div>
+
+            <div class="col-span-1">
+                <h3 class="text-2xl font-semibold mb-4">My Journey</h3>
+                <div class="space-y-6">
+                    <div class="flex">
+                        <div class="mr-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-dark-700 dark:bg-gray-300 flex items-center justify-center">
+                                <i class="fab fa-python text-blue-500 text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Beginner Programming</h4>
+                            <p class="text-sm text-gray-400 dark:text-gray-600">Python • 2018 - 2022</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-dark-700 dark:bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Computer Science Degree</h4>
+                            <p class="text-sm text-gray-400 dark:text-gray-600">Lorestan University • 2024 - Present</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-dark-700 dark:bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-briefcase text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Learning Databases</h4>
+                            <p class="text-sm text-gray-400 dark:text-gray-600">SQL and NoSQL • 2024 - Present</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-dark-700 dark:bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-briefcase text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Backend Developer</h4>
+                            <p class="text-sm text-gray-400 dark:text-gray-600">FastAPI • 2024 - Present</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mr-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-dark-700 dark:bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-rocket text-blue-500"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Bot Developer</h4>
+                            <p class="text-sm text-gray-400 dark:text-gray-600">Telegram • 2024 - Present</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1">
+                <h3 class="text-2xl font-semibold mb-4">My Approach</h3>
+                <div class="space-y-4">
+                    <div class="bg-dark-700 dark:bg-gray-300 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-900/30 dark:bg-blue-200 flex items-center justify-center mr-3">
+                                <i class="fas fa-lightbulb text-blue-400 text-sm"></i>
+                            </div>
+                            <h4 class="font-medium">Problem Solving</h4>
+                        </div>
+                        <p class="text-gray-400 dark:text-gray-600 text-sm">
+                            Breaking down complex problems into manageable tasks and finding efficient solutions.
+                        </p>
+                    </div>
+                    <div class="bg-dark-700 dark:bg-gray-300 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-900/30 dark:bg-blue-200 flex items-center justify-center mr-3">
+                                <i class="fas fa-code text-blue-400 text-sm"></i>
+                            </div>
+                            <h4 class="font-medium">Clean Code</h4>
+                        </div>
+                        <p class="text-gray-400 dark:text-gray-600 text-sm">
+                            Writing maintainable, well-documented code following best practices and design patterns.
+                        </p>
+                    </div>
+                    <div class="bg-dark-700 dark:bg-gray-300 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-900/30 dark:bg-blue-200 flex items-center justify-center mr-3">
+                                <i class="fas fa-users text-blue-400 text-sm"></i>
+                            </div>
+                            <h4 class="font-medium">Efficiency</h4>
+                        </div>
+                        <p class="text-gray-400 dark:text-gray-600 text-sm">
+                            Building systems that are performant and resource-efficient. and of course, usable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-dark-800 dark:bg-gray-100 p-6 rounded-xl card-hover">
+                <div
+                    class="w-16 h-16 bg-blue-900/30 dark:bg-blue-200 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-server text-2xl text-blue-500"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Backend</h3>
+                <p class="text-gray-400 dark:text-gray-600 text-center">
+                    Python, FastAPI, Pydantic, REST APIs
+                </p>
+            </div>
+            <div class="bg-dark-800 dark:bg-gray-100 p-6 rounded-xl card-hover">
+                <div
+                    class="w-16 h-16 bg-blue-900/30 dark:bg-blue-200 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fab fa-telegram text-2xl text-blue-500"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Telegram Bots</h3>
+                <p class="text-gray-400 dark:text-gray-600 text-center">
+                    Bot development, Automation, AI integration
+                </p>
+            </div>
+            <div class="bg-dark-800 dark:bg-gray-100 p-6 rounded-xl card-hover">
+                <div
+                    class="w-16 h-16 bg-blue-900/30 dark:bg-blue-200 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-database text-2xl text-blue-500"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-center mb-2">Database</h3>
+                <p class="text-gray-400 dark:text-gray-600 text-center">
+                    PostgreSQL, SQLite, ORMs, Query optimization
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-dark-800 dark:bg-gray-100 rounded-xl p-8">
+            <h3 class="text-2xl font-semibold mb-6 text-center">Technologies I Work With</h3>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="Python" title="Python">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="FastAPI" title="FastAPI">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="PostgreSQL" title="PostgreSQL">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="SQLite" title="SQLite">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="Docker" title="Docker">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="Git" title="Git">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="GitHub" title="GitHub">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytest/pytest-original.svg"
+                    class="tech-icon h-12 w-12 mx-auto" alt="Pytest" title="Pytest">
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-dark-800 dark:bg-gray-200 rounded-xl">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">Featured <span class="gradient-text">Projects</span></h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Project 1 -->
+            <div class="bg-dark-900 dark:bg-white rounded-xl overflow-hidden card-hover">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="src/Tel_Scraping.jpg" alt="Project 1" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 dark:from-white to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Telegram Delete Account Script</h3>
+                        <div class="flex space-x-2">
+                            <a href="https://github.com/ItsReZNuM/TelegramAccountDelete"
+                                class="text-gray-400 dark:text-gray-600 hover:text-blue-500 transition" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://github.com/ItsReZNuM/TelegramAccountDelete"
+                                class="text-gray-400 dark:text-gray-600 hover:text-blue-500 transition" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 dark:text-gray-600 mb-4">
+                        This Script has been made by BeautifullSoup and requests for sending delete account request for
+                        Telegram API
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">Python</span>
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">Telegram
+                            API</span>
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">WebScraping</span>
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">BeatifullSoup</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="bg-dark-900 dark:bg-white rounded-xl overflow-hidden card-hover">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="src/bot.png" alt="Project 2" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 dark:from-white to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Price Telegram Bot</h3>
+                        <div class="flex space-x-2">
+                            <a href="https://github.com/ItsReZNuM/PriceTGBot"
+                                class="text-gray-400 dark:text-gray-600 hover:text-blue-500 transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://github.com/ItsReZNuM/PriceTGBot" target="_blank"
+                                class="text-gray-400 dark:text-gray-600 hover:text-blue-500 transition">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 dark:text-gray-600 mb-4">
+                        A Telegram Bot that gives routine daily info , Plus Crypto , gold and currency prices.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">Python</span>
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">FastAPI</span>
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">Docker</span>
+                        <span
+                            class="px-3 py-1 bg-blue-900/30 dark:bg-blue-200 text-blue-400 dark:text-blue-800 rounded-full text-xs">Redis</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="https://github.com/ItsReZNuM" target="_blanks"
+                class="inline-flex items-center px-6 py-3 border border-gray-700 dark:border-gray-300 hover:border-blue-500 rounded-md text-white dark:text-gray-800 font-medium transition">
+                Want To See All The Projects ? Take a Look at my github !
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+
+        <div class="text-center">
+            <h3 class="text-2xl font-semibold mb-6">Connect with me on these platforms</h3>
+
+            <div class="flex flex-wrap justify-center gap-6 mt-10">
+                <a href="https://github.com/ItsReZNuM" target="_blank"
+                    class="github-btn px-8 py-4 rounded-lg bg-dark-800 dark:bg-gray-200 border border-dark-700 dark:border-gray-300 text-xl font-medium transition-all duration-300">
+                    <i class="fab fa-github mr-2"></i> GitHub
+                </a>
+
+                <a href="https://t.me/ItsRezNuM" target="_blank"
+                    class="telegram-btn px-8 py-4 rounded-lg bg-dark-800 dark:bg-gray-200 border border-dark-700 dark:border-gray-300 text-xl font-medium transition-all duration-300">
+                    <i class="fab fa-telegram mr-2"></i> Telegram
+                </a>
+
+                <a href="https://instagram.com/rez.num" target="_blank"
+                    class="instagram-btn px-8 py-4 rounded-lg bg-dark-800 dark:bg-gray-200 border border-dark-700 dark:border-gray-300 text-xl font-medium transition-all duration-300">
+                    <i class="fab fa-instagram mr-2"></i> Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+        class="bg-dark-800 dark:bg-gray-200 py-12 px-4 sm:px-6 lg:px-8 border-t border-dark-700 dark:border-gray-300">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">ReZNuM</span>
+                    <p class="text-gray-400 dark:text-gray-600 mt-2">Building digital experiences that matter.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-6 mb-4">
+                        <a href="#"
+                            class="text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black transition">Home</a>
+                        <a href="#"
+                            class="text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black transition">About</a>
+                        <a href="#"
+                            class="text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black transition">Projects</a>
+                        <a href="#"
+                            class="text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black transition">Contact</a>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-500 text-sm">© 2025 ReZNuM Portfolio. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            html.classList.add(savedTheme);
+
+            updateThemeIcon(savedTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    if (html.classList.contains('dark')) {
+                        html.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                        updateThemeIcon('light');
+                    } else {
+                        html.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                        updateThemeIcon('dark');
+                    }
+                });
+            }
+
+            function updateThemeIcon(theme) {
+                const iconMoon = document.querySelector('.fa-moon');
+                const iconSun = document.querySelector('.fa-sun');
+
+                if (theme === 'dark') {
+                    if (iconSun) iconSun.classList.remove('hidden');
+                    if (iconMoon) iconMoon.classList.add('hidden');
+                } else {
+                    if (iconSun) iconSun.classList.add('hidden');
+                    if (iconMoon) iconMoon.classList.remove('hidden');
+                }
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
