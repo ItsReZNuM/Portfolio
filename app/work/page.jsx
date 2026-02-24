@@ -19,29 +19,24 @@ const projects = [
   {
     num: "01",
     category: "backend",
-    title: "Project 1",
+    title: "Support Chat System",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem non velit iusto veniam quam magni!",
-    stack: [{ name: "FastAPI" }, { name: "Python" }, { name: "PostgreSQL" }],
-    image: "/assets/",
+      "This project has been made by me and another frontend developer for a company. The main purpose of this project is to provide a support chat system for the company's customers. The system allows customers to chat with support agents in real-time and get their issues resolved quickly.",
+    stack: [
+      { name: "FastAPI" },
+      { name: "Python" },
+      { name: "PostgreSQL" },
+      { name: "Redis" },
+      { name: "SocketIO" },
+    ],
+    image: "/assets/chat.png",
     live: "www.google.com",
-    github: "",
+    github: "https://github.com/SupportChatSystem",
   },
   {
     num: "02",
-    category: "backend",
-    title: "Project 2",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem non velit iusto veniam quam magni!",
-    stack: [{ name: "Django" }, { name: "Python" }, { name: "MongoDB" }],
-    image: "/assets/",
-    live: "",
-    github: "",
-  },
-  {
-    num: "03",
     category: "bots",
-    title: "Project 3",
+    title: "Project 2",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem non velit iusto veniam quam magni!",
     stack: [
@@ -50,8 +45,8 @@ const projects = [
       { name: "Telegram" },
     ],
     image: "/assets/works/unit.png",
-    live: "",
-    github: "",
+    live: "https://github.com/itsreznum",
+    github: "https://github.com/itsreznum",
   },
 ];
 
@@ -103,7 +98,7 @@ const Work = () => {
               {/* Buttons */}
               <div className="flex items-center gap-4 ">
                 {/* Live Project Button */}
-                <Link href={project.live} target="_blank">
+                {/* <Link href={project.live} target="_blank">
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/10 backdrop-blur-sm flex justify-center items-center group transition-all duration-300 hover:bg-accent/10 hover:shadow-xl hover:shadow-accent/30">
@@ -118,7 +113,7 @@ const Work = () => {
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                </Link>
+                </Link> */}
                 {/* GitHub Project Button */}
                 <Link href={project.github} target="_blank">
                   <TooltipProvider delayDuration={100}>
@@ -151,7 +146,7 @@ const Work = () => {
                   <SwiperSlide key={index} className="w-full">
                     <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20  ">
                       {/* Overlay */}
-                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10" ></div>
+                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
                       {/* Image */}
                       <div className="relative w-full h-full ">
                         <Image
@@ -166,8 +161,10 @@ const Work = () => {
                 );
               })}
               {/* Slider Buttons */}
-              <WorkSliderBtns containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none" btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all " />
-              
+              <WorkSliderBtns
+                containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all "
+              />
             </Swiper>
           </div>
         </div>
