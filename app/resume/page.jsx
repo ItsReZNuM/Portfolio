@@ -76,7 +76,7 @@ const experience = {
     {
       company: "Phoenix Inc.",
       position: "Backend Developer",
-      duration: "2025 - Present",
+      duration: "2025 - 2026",
     },
   ],
 };

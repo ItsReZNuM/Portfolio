@@ -38,7 +38,7 @@ const projects = [
     category: "bots",
     title: "Project 2",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem non velit iusto veniam quam magni!",
+      "Build Different Telegram Bots. This project is a collection of different Telegram bots that I have built using the PyTelegramBotAPI library. The bots provide various functionalities such as sending messages, managing groups, and automating tasks.",
     stack: [
       { name: "PyTelegramBotAPI" },
       { name: "Python" },
@@ -47,6 +47,20 @@ const projects = [
     image: "/assets/works/unit.png",
     live: "https://github.com/itsreznum",
     github: "https://github.com/itsreznum",
+  },
+  {
+    num: "03",
+    category: "site",
+    title: "Project 3",
+    description:
+      "A Tool for Course Selection and Management. This project is a web application that allows students to select and manage their courses. The application provides a user-friendly interface for students to browse available courses, add them to their schedule, and manage their course load.",
+    stack: [
+      { name: "NextJS" },
+      { name: "TailwindCSS" },
+      { name: "React" },],
+    image: "/assets/works/dark.png",
+    live: "https://course-selection-rho.vercel.app/",
+    github: "https://github.com/ItsReZNuM/CourseSelection",
   },
 ];
 
@@ -98,7 +112,7 @@ const Work = () => {
               {/* Buttons */}
               <div className="flex items-center gap-4 ">
                 {/* Live Project Button */}
-                {/* <Link href={project.live} target="_blank">
+                <Link href={project.live} target="_blank">
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/10 backdrop-blur-sm flex justify-center items-center group transition-all duration-300 hover:bg-accent/10 hover:shadow-xl hover:shadow-accent/30">
@@ -113,7 +127,7 @@ const Work = () => {
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                </Link> */}
+                </Link>
                 {/* GitHub Project Button */}
                 <Link href={project.github} target="_blank">
                   <TooltipProvider delayDuration={100}>
