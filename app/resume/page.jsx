@@ -65,7 +65,7 @@ const skillIcons = [
 ];
 
 const Resume = () => {
-  const { t, locale, messages, toPersianDigits } = useLanguage();
+  const { t, locale, dir, messages, toPersianDigits } = useLanguage();
   const resume = messages?.resume || {};
 
   const currentYear = new Date().getFullYear();
@@ -127,10 +127,12 @@ const Resume = () => {
       <div className="container mx-auto">
         <Tabs
           defaultValue="experience"
+          dir={dir}
+          key={`${locale}-${dir}`}
           className="flex flex-col xl:flex-row gap-[60px]"
         >
-          {/* Tab Navigation */}
-          <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6">
+          {/* Tab Navigation: Right in RTL, Left in LTR */}
+          <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6 shrink-0">
             <TabsTrigger value="experience">
               {t("resume.tabs.experience", "Experience")}
             </TabsTrigger>
@@ -145,16 +147,16 @@ const Resume = () => {
             </TabsTrigger>
           </TabsList>
 
-          {/* Content Area */}
-          <div className="min-h-[70vh] w-full">
+          {/* Content Area: Left in RTL, Right in LTR */}
+          <div className="min-h-[70vh] w-full flex-1">
             {/* Experience Tab */}
             <TabsContent value="experience" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-start">
                 <h3 className="text-4xl font-bold">{resume?.experience?.title}</h3>
-                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 leading-relaxed">
+                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 leading-relaxed text-start">
                   {resume?.experience?.description}
                 </p>
-                <ScrollArea className="h-[400px]">
+                <ScrollArea className="h-[400px]" dir={dir}>
                   <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     {resume?.experience?.items?.map((item, index) => {
                       return (
@@ -182,10 +184,10 @@ const Resume = () => {
             <TabsContent value="education" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-start">
                 <h3 className="text-4xl font-bold">{resume?.education?.title}</h3>
-                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 leading-relaxed">
+                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 leading-relaxed text-start">
                   {resume?.education?.description}
                 </p>
-                <ScrollArea className="h-[400px]">
+                <ScrollArea className="h-[400px]" dir={dir}>
                   <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     {resume?.education?.items?.map((item, index) => {
                       return (
@@ -214,7 +216,7 @@ const Resume = () => {
               <div className="flex flex-col gap-[30px]">
                 <div className="flex flex-col gap-[30px] text-center xl:text-start">
                   <h3 className="text-4xl font-bold">{resume?.skills?.title}</h3>
-                  <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 mb-4 leading-relaxed">
+                  <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 mb-4 leading-relaxed text-start">
                     {resume?.skills?.description}
                   </p>
                 </div>
@@ -247,7 +249,7 @@ const Resume = () => {
             <TabsContent value="about" className="w-full text-center xl:text-start">
               <div className="flex flex-col gap-[30px]">
                 <h3 className="text-4xl font-bold">{resume?.about?.title}</h3>
-                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 leading-relaxed">
+                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0 leading-relaxed text-start">
                   {resume?.about?.description}
                 </p>
                 <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">

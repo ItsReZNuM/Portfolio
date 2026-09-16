@@ -12,7 +12,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Reza Mohamadnia | BackEnd Developer",
+  title: "Reza Mohamadnia",
   description: "Portfolio of Reza Mohamadnia, BackEnd Developer specializing in Python, Django, FastAPI, and Database Architecture.",
   keywords: ["Backend Developer", "Python", "Django", "FastAPI", "Reza Mohamadnia", "رضا محمدنیا"],
   authors: [{ name: "Reza Mohamadnia" }],
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var l=localStorage.getItem('portfolio_lang');if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';}}catch(e){}})();`,
+            __html: `(function(){try{var l=localStorage.getItem('portfolio_lang');if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';document.title='رضا محمدنیا';}else{document.documentElement.lang='en';document.documentElement.dir='ltr';document.title='Reza Mohamadnia';}}catch(e){}})();`,
           }}
         />
       </head>

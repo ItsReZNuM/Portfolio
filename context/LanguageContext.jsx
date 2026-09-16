@@ -8,6 +8,7 @@ import React, {
   useMemo,
   useSyncExternalStore,
 } from "react";
+import { DirectionProvider } from "@radix-ui/react-direction";
 
 // Import translations
 import enCommon from "@/locales/en/common.json";
@@ -77,21 +78,23 @@ function getServerSnapshot() {
 
 export function LanguageProvider({ children }) {
   const locale = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const dir = locale === "fa" ? "rtl" : "ltr";
+  const isRTL = locale === "fa";
 
   // Synchronize document attributes and title whenever locale changes
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.documentElement.dir = locale === "fa" ? "rtl" : "ltr";
-    const title = translations[locale]?.common?.meta?.title;
-    if (title) {
-      document.title = title;
-    }
-  }, [locale]);
+    document.documentElement.dir = dir;
+    document.title = locale === "fa" ? "رضا محمدنیا" : "Reza Mohamadnia";
+  }, [locale, dir]);
 
   const setLocale = useCallback((newLocale) => {
     if (newLocale !== "en" && newLocale !== "fa") return;
     try {
       localStorage.setItem("portfolio_lang", newLocale);
+      document.documentElement.lang = newLocale;
+      document.documentElement.dir = newLocale === "fa" ? "rtl" : "ltr";
+      document.title = newLocale === "fa" ? "رضا محمدنیا" : "Reza Mohamadnia";
       window.dispatchEvent(new Event("portfolio_lang_change"));
     } catch {
       // Handle storage exception
@@ -136,9 +139,6 @@ export function LanguageProvider({ children }) {
     [locale]
   );
 
-  const dir = locale === "fa" ? "rtl" : "ltr";
-  const isRTL = locale === "fa";
-
   const value = useMemo(
     () => ({
       locale,
@@ -155,7 +155,9 @@ export function LanguageProvider({ children }) {
 
   return (
     <LanguageContext.Provider value={value}>
-      {children}
+      <DirectionProvider dir={dir}>
+        {children}
+      </DirectionProvider>
     </LanguageContext.Provider>
   );
 }
