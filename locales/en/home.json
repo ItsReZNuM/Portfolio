@@ -1,0 +1,13 @@
+{
+  "role": "BackEnd Developer",
+  "greeting": "Hello, I'm",
+  "name": "Reza Mohamadnia",
+  "bio": "So Curious About learning tech things and always trying to improve myself...",
+  "downloadCv": "Download CV",
+  "stats": {
+    "experience": "Years of Experience",
+    "projects": "Projects Completed",
+    "technologies": "Technologies Learned",
+    "commits": "Code Commits"
+  }
+}

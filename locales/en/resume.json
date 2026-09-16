@@ -1,0 +1,82 @@
+{
+  "tabs": {
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "about": "About Me"
+  },
+  "experience": {
+    "title": "My Experience",
+    "description": "I started programming with Python in 2020, but I didn’t fully learn even the basics, so I stopped. In 2024, I started again, completed the basics and advanced Python courses, and then moved on to learning backend development.",
+    "items": [
+      {
+        "company": "Havir Tech Inc.",
+        "position": "SQL Developer",
+        "duration": "2024 - 2025"
+      },
+      {
+        "company": "Phoenix Inc.",
+        "position": "Backend Developer",
+        "duration": "2025 - 2026"
+      }
+    ]
+  },
+  "education": {
+    "title": "My Education",
+    "description": "Educated in Sampad High School and Now I'm Studying Computer Science in Lorestan University.",
+    "items": [
+      {
+        "institution": "Sampad High School",
+        "degree": "Diploma",
+        "duration": "2021 - 2024"
+      },
+      {
+        "institution": "Lorestan University",
+        "degree": "Bachelor",
+        "duration": "2024 - Present"
+      },
+      {
+        "institution": "MaktabKhooneh",
+        "degree": "Basic Python",
+        "duration": "2024 - 2025"
+      },
+      {
+        "institution": "MaktabKhooneh",
+        "degree": "Advanced Python",
+        "duration": "2024 - 2025"
+      },
+      {
+        "institution": "YouTube Online Course",
+        "degree": "FastAPI",
+        "duration": "2024 - 2025"
+      }
+    ]
+  },
+  "skills": {
+    "title": "My Skills",
+    "description": "Here is a List of my skills that I've been working with recently."
+  },
+  "about": {
+    "title": "About Me",
+    "description": "A developer passionate about technology, backend systems, and crafting efficient digital solutions.",
+    "fields": {
+      "name": "Name:",
+      "phone": "Phone:",
+      "experience": "Experience:",
+      "instagram": "Instagram:",
+      "nationality": "Nationality:",
+      "email": "Email:",
+      "languages": "Languages:",
+      "age": "Age:"
+    },
+    "values": {
+      "name": "Reza Mohamadnia",
+      "phone": "(+98) 916 628 0889",
+      "experience": "+2 Years",
+      "instagram": "ItsReZNuM",
+      "nationality": "Iranian",
+      "email": "rmohamadnia85@gmail.com",
+      "languages": "Persian, English"
+    }
+  }
+}

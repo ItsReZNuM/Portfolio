@@ -5,6 +5,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./context/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -21,7 +22,9 @@ module.exports = {
     },
 
     fontFamily: {
-      primary: ["var(--font-jetbrains)"],
+      primary: ["var(--font-primary)"],
+      jetbrains: ["var(--font-jetbrains)"],
+      estedad: ["var(--font-estedad)"],
     },
 
     extend: {
@@ -31,7 +34,7 @@ module.exports = {
           DEFAULT: "#1ee6c8",
           hover: "#19c9ad",
         },
-        border: "#1ee6c8"
+        border: "#1ee6c8",
       },
 
       keyframes: {

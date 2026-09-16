@@ -1,0 +1,20 @@
+[
+  {
+    "num": "01",
+    "title": "BackEnd Web Development (Django & FastAPI)",
+    "description": "Building scalable and secure backend applications using Django and FastAPI. Experienced in designing RESTful APIs, authentication systems, and high-performance server logic for modern web platforms.",
+    "href": "https://www.djangoproject.com/"
+  },
+  {
+    "num": "02",
+    "title": "Database Design (SQL & NoSQL)",
+    "description": "Designing efficient database architectures using SQL and NoSQL technologies. Focused on data modeling, optimization, indexing, and creating flexible storage solutions for scalable applications.",
+    "href": "https://docs.djangoproject.com/en/5.2/ref/databases/"
+  },
+  {
+    "num": "03",
+    "title": "Telegram Bot Development",
+    "description": "Developing advanced Telegram bots with interactive features and automated workflows. Experienced in building systems for messaging, analytics, integrations, and high-speed task automation.",
+    "href": "https://core.telegram.org/bots/tutorial"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "brand": "Reza",
+  "meta": {
+    "title": "Reza Mohamadnia | BackEnd Developer",
+    "description": "Portfolio of Reza Mohamadnia, BackEnd Developer specializing in Python, Django, FastAPI, and Database Architecture."
+  },
+  "nav": {
+    "home": "home",
+    "services": "services",
+    "resume": "resume",
+    "work": "work",
+    "contact": "contact"
+  },
+  "actions": {
+    "hireMe": "Hire Me",
+    "downloadCv": "Download CV",
+    "sendMessage": "Send Message",
+    "close": "Close"
+  },
+  "switcher": {
+    "en": "EN",
+    "fa": "فا",
+    "ariaLabel": "Switch language"
+  }
+}

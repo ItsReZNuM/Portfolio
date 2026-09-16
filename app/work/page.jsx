@@ -4,74 +4,29 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BsArrowUpRight, BsGit, BsGithub } from "react-icons/bs";
+import { BsArrowUpRight, BsGithub } from "react-icons/bs";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@radix-ui/react-tooltip";
+  TooltipProvider,
+} from "@/components/ui/tooltip";
 import Link from "next/link";
 import Image from "next/image";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import WorkSliderBtns from "@/components/WorkSliderBtns";
-
-const projects = [
-  {
-    num: "01",
-    category: "backend",
-    title: "Support Chat System",
-    description:
-      "This project has been made by me and another frontend developer for a company. The main purpose of this project is to provide a support chat system for the company's customers. The system allows customers to chat with support agents in real-time and get their issues resolved quickly.",
-    stack: [
-      { name: "FastAPI" },
-      { name: "Python" },
-      { name: "PostgreSQL" },
-      { name: "Redis" },
-      { name: "SocketIO" },
-    ],
-    image: "/assets/chat.png",
-    live: "www.google.com",
-    github: "https://github.com/SupportChatSystem",
-  },
-  {
-    num: "02",
-    category: "bots",
-    title: "Project 2",
-    description:
-      "Build Different Telegram Bots. This project is a collection of different Telegram bots that I have built using the PyTelegramBotAPI library. The bots provide various functionalities such as sending messages, managing groups, and automating tasks.",
-    stack: [
-      { name: "PyTelegramBotAPI" },
-      { name: "Python" },
-      { name: "Telegram" },
-    ],
-    image: "/assets/works/unit.png",
-    live: "https://github.com/itsreznum",
-    github: "https://github.com/itsreznum",
-  },
-  {
-    num: "03",
-    category: "site",
-    title: "Project 3",
-    description:
-      "A Tool for Course Selection and Management. This project is a web application that allows students to select and manage their courses. The application provides a user-friendly interface for students to browse available courses, add them to their schedule, and manage their course load.",
-    stack: [
-      { name: "NextJS" },
-      { name: "TailwindCSS" },
-      { name: "React" },],
-    image: "/assets/works/dark.png",
-    live: "https://course-selection-rho.vercel.app/",
-    github: "https://github.com/ItsReZNuM/CourseSelection",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 const Work = () => {
-  const [project, setproject] = useState(projects[0]);
+  const { messages, dir, locale, isRTL, t } = useLanguage();
+  const projects = messages?.work?.projects || [];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const currentProject = projects[activeIndex] || projects[0] || {};
+
   const handleSlideChange = (swiper) => {
-    // get current slide index
-    const currentIndex = swiper.activeIndex;
-    // Update project state based on current slide index
-    setproject(projects[currentIndex]);
+    setActiveIndex(swiper.activeIndex);
   };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -82,102 +37,143 @@ const Work = () => {
       className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
     >
       <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row xl:gap-[30px] ">
+        <div className="flex flex-col xl:flex-row xl:gap-[30px]">
+          {/* Project Details */}
           <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
-            <div className="flex flex-col gap-[30px] h-[50%] ">
+            <div className="flex flex-col gap-[30px] h-[50%]">
               {/* Outline Number */}
               <div className="text-8xl leading-none font-extrabold text-transparent text-outline">
-                {project.num}
+                {currentProject.num}
               </div>
-              {/* Project Category */}
-              <h2 className="capitalize text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500">
-                {project.category} Project
-              </h2>
+
+              {/* Project Category & Title */}
+              <div>
+                <span className="text-sm font-semibold tracking-wider text-accent uppercase rtl:normal-case">
+                  {currentProject.category}{" "}
+                  {t("work.categorySuffix", "Project")}
+                </span>
+                <h2 className="text-[32px] xl:text-[42px] font-bold leading-tight text-white transition-all duration-500 mt-1">
+                  {currentProject.title}
+                </h2>
+              </div>
+
               {/* Project Description */}
-              <p className="text-white/60 ">{project.description}</p>
+              <p className="text-white/60 leading-relaxed text-start">
+                {currentProject.description}
+              </p>
+
               {/* Stack */}
-              <ul className="flex gap-4">
-                {project.stack.map((item, index) => {
+              <ul className="flex flex-wrap gap-2 xl:gap-4 ltr-isolate" dir="ltr">
+                {currentProject.stack?.map((item, index) => {
                   return (
-                    <li key={index} className="text-xl text-accent ">
+                    <li key={index} className="text-lg text-accent">
                       {item.name}
-                      {/* Remove The Last Comma */}
-                      {index !== project.stack.length - 1 && ","}
+                      {index !== currentProject.stack.length - 1 && ","}
                     </li>
                   );
                 })}
               </ul>
+
               {/* Border */}
-              <div className="border border-white/20 "></div>
-              {/* Buttons */}
-              <div className="flex items-center gap-4 ">
+              <div className="border border-white/20"></div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-4">
                 {/* Live Project Button */}
-                <Link href={project.live} target="_blank">
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/10 backdrop-blur-sm flex justify-center items-center group transition-all duration-300 hover:bg-accent/10 hover:shadow-xl hover:shadow-accent/30">
-                        <BsArrowUpRight className="text-white text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-45" />
-                      </TooltipTrigger>
+                {currentProject.live && (
+                  <Link
+                    href={currentProject.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("work.tooltips.live", "Live Project")}
+                  >
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/10 backdrop-blur-sm flex justify-center items-center group transition-all duration-300 hover:bg-accent/10 hover:shadow-xl hover:shadow-accent/30 cursor-pointer">
+                          <BsArrowUpRight
+                            className={`text-white text-3xl transition-transform duration-500 group-hover:scale-110 ${
+                              isRTL
+                                ? "group-hover:-rotate-45 -scale-x-100"
+                                : "group-hover:rotate-45"
+                            }`}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent
+                          side="top"
+                          className="bg-[#1a1f25] border border-white/10 text-xs px-3 py-1.5 rounded-md text-white shadow-md"
+                        >
+                          <p>{t("work.tooltips.live", "Live Project")}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
 
-                      <TooltipContent
-                        side="top"
-                        className="bg-black/70 text-xs px-3 py-1 rounded-md backdrop-blur-sm"
-                      >
-                        <p className="text-white">Live Project</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
                 {/* GitHub Project Button */}
-                <Link href={project.github} target="_blank">
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/10 backdrop-blur-sm flex justify-center items-center group transition-all duration-300 hover:bg-accent/10 hover:shadow-xl hover:shadow-accent/30 ">
-                        <BsGithub className="text-white text-3xl transition-transform duration-500 group-hover:scale-110 " />
-                      </TooltipTrigger>
-
-                      <TooltipContent
-                        side="top"
-                        className="bg-black/70 text-xs px-3 py-1 rounded-md backdrop-blur-sm"
-                      >
-                        <p className="text-white">Github Repository</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+                {currentProject.github && (
+                  <Link
+                    href={currentProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("work.tooltips.github", "Github Repository")}
+                  >
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/10 backdrop-blur-sm flex justify-center items-center group transition-all duration-300 hover:bg-accent/10 hover:shadow-xl hover:shadow-accent/30 cursor-pointer">
+                          <BsGithub className="text-white text-3xl transition-transform duration-500 group-hover:scale-110" />
+                        </TooltipTrigger>
+                        <TooltipContent
+                          side="top"
+                          className="bg-[#1a1f25] border border-white/10 text-xs px-3 py-1.5 rounded-md text-white shadow-md"
+                        >
+                          <p>
+                            {t("work.tooltips.github", "Github Repository")}
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
+
+          {/* Swiper Slider */}
           <div className="w-full xl:w-[50%]">
             <Swiper
+              key={`${locale}-${dir}`}
+              dir={dir}
               spaceBetween={30}
               slidesPerView={1}
+              initialSlide={activeIndex}
               className="xl:h-[520px] mb-12"
               onSlideChange={handleSlideChange}
             >
-              {projects.map((project, index) => {
+              {projects.map((item, index) => {
                 return (
                   <SwiperSlide key={index} className="w-full">
-                    <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20  ">
+                    <div className="h-[460px] relative group flex justify-center items-center bg-[#27272c]/40 rounded-xl overflow-hidden border border-white/5">
                       {/* Overlay */}
-                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
+                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/20 z-10"></div>
                       {/* Image */}
-                      <div className="relative w-full h-full ">
+                      <div className="relative w-full h-full">
                         <Image
-                          src={project.image}
+                          src={item.image}
                           fill
                           className="object-cover"
-                          alt=""
+                          alt={item.title || ""}
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
                       </div>
                     </div>
                   </SwiperSlide>
                 );
               })}
+
               {/* Slider Buttons */}
               <WorkSliderBtns
-                containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
-                btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all "
+                containerStyles="flex gap-2 absolute end-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all rounded-sm cursor-pointer shadow-md"
               />
             </Swiper>
           </div>

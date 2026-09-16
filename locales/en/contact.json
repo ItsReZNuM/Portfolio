@@ -1,0 +1,33 @@
+{
+  "title": "Let's Work Together",
+  "subtitle": "Have a project in mind, a question, or an opportunity? Feel free to reach out using the form below or through direct contact channels.",
+  "placeholders": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone number",
+    "service": "Select a service",
+    "message": "Type your message here..."
+  },
+  "services": {
+    "label": "Select a service",
+    "backend": "BackEnd Web Development",
+    "telegram": "Telegram Bot Development",
+    "database": "Database Architecture & Optimization"
+  },
+  "submit": "Send Message",
+  "info": {
+    "phone": {
+      "title": "Phone",
+      "value": "(+98) 916 628 0889"
+    },
+    "email": {
+      "title": "Email",
+      "value": "rmohamadnia85@gmail.com"
+    },
+    "location": {
+      "title": "Location",
+      "value": "Iran, Lorestan, KhorramAbad"
+    }
+  }
+}

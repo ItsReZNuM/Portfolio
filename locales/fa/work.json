@@ -1,0 +1,57 @@
+{
+  "tooltips": {
+    "live": "مشاهده پروژه",
+    "github": "مخزن گیت‌هاب"
+  },
+  "slider": {
+    "prev": "پروژه قبلی",
+    "next": "پروژه بعدی"
+  },
+  "categorySuffix": "پروژه",
+  "projects": [
+    {
+      "num": "۰۱",
+      "category": "بک‌اند",
+      "title": "سامانه چت پشتیبانی آنلاین",
+      "description": "این پروژه با همکاری من و یک توسعه‌دهنده فرانت‌اند برای یک شرکت پیاده‌سازی شده است. هدف اصلی این سامانه، ارائه بستر ارتباط بلادرنگ (Real-time) میان کاربران و تیم پشتیبانی شرکت با پاسخ‌دهی سریع است.",
+      "stack": [
+        { "name": "FastAPI" },
+        { "name": "Python" },
+        { "name": "PostgreSQL" },
+        { "name": "Redis" },
+        { "name": "SocketIO" }
+      ],
+      "image": "/assets/chat.png",
+      "live": "https://www.google.com",
+      "github": "https://github.com/SupportChatSystem"
+    },
+    {
+      "num": "۰۲",
+      "category": "ربات تلگرام",
+      "title": "مجموعه ربات‌های تلگرام",
+      "description": "مجموعه‌ای از ربات‌های کاربردی تلگرام که با استفاده از کتابخانه PyTelegramBotAPI توسعه داده‌ام. این ربات‌ها قابلیت‌هایی همچون ارسال پیام‌های دوره‌ای، مدیریت هوشمند گروه‌ها و خودکارسازی فرآیندها را فراهم می‌کنند.",
+      "stack": [
+        { "name": "PyTelegramBotAPI" },
+        { "name": "Python" },
+        { "name": "Telegram" }
+      ],
+      "image": "/assets/works/unit.png",
+      "live": "https://github.com/itsreznum",
+      "github": "https://github.com/itsreznum"
+    },
+    {
+      "num": "۰۳",
+      "category": "وب‌سایت",
+      "title": "سامانه مدیریت و انتخاب واحد دانشگاهی",
+      "description": "یک وب‌اپلیکیشن کاربردی برای دانشجویان جهت بررسی، برنامه‌ریزی و مدیریت فرآیند انتخاب واحد دروس. این سامانه رابط کاربری سریعی برای مشاهده تقویم درسی و چیدمان واحدهای دانشگاهی ارائه می‌دهد.",
+      "stack": [
+        { "name": "NextJS" },
+        { "name": "TailwindCSS" },
+        { "name": "React" }
+      ],
+      "image": "/assets/works/dark.png",
+      "live": "https://course-selection-rho.vercel.app/",
+      "github": "https://github.com/ItsReZNuM/CourseSelection"
+    }
+  ]
+}

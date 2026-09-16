@@ -1,0 +1,57 @@
+{
+  "tooltips": {
+    "live": "Live Project",
+    "github": "Github Repository"
+  },
+  "slider": {
+    "prev": "Previous project",
+    "next": "Next project"
+  },
+  "categorySuffix": "Project",
+  "projects": [
+    {
+      "num": "01",
+      "category": "backend",
+      "title": "Support Chat System",
+      "description": "This project has been made by me and another frontend developer for a company. The main purpose of this project is to provide a support chat system for the company's customers. The system allows customers to chat with support agents in real-time and get their issues resolved quickly.",
+      "stack": [
+        { "name": "FastAPI" },
+        { "name": "Python" },
+        { "name": "PostgreSQL" },
+        { "name": "Redis" },
+        { "name": "SocketIO" }
+      ],
+      "image": "/assets/chat.png",
+      "live": "https://www.google.com",
+      "github": "https://github.com/SupportChatSystem"
+    },
+    {
+      "num": "02",
+      "category": "bots",
+      "title": "Telegram Bot Suite",
+      "description": "Build Different Telegram Bots. This project is a collection of different Telegram bots that I have built using the PyTelegramBotAPI library. The bots provide various functionalities such as sending messages, managing groups, and automating tasks.",
+      "stack": [
+        { "name": "PyTelegramBotAPI" },
+        { "name": "Python" },
+        { "name": "Telegram" }
+      ],
+      "image": "/assets/works/unit.png",
+      "live": "https://github.com/itsreznum",
+      "github": "https://github.com/itsreznum"
+    },
+    {
+      "num": "03",
+      "category": "site",
+      "title": "Course Selection Platform",
+      "description": "A Tool for Course Selection and Management. This project is a web application that allows students to select and manage their courses. The application provides a user-friendly interface for students to browse available courses, add them to their schedule, and manage their course load.",
+      "stack": [
+        { "name": "NextJS" },
+        { "name": "TailwindCSS" },
+        { "name": "React" }
+      ],
+      "image": "/assets/works/dark.png",
+      "live": "https://course-selection-rho.vercel.app/",
+      "github": "https://github.com/ItsReZNuM/CourseSelection"
+    }
+  ]
+}
