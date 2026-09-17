@@ -5,35 +5,37 @@ import Image from "next/image";
 
 const Photo = () => {
   return (
-    <div className="w-full h-full relative ">
+    <div className="w-full h-full relative flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
           transition: { duration: 0.5, delay: 2, ease: "easeIn" },
         }}
+        className="relative flex items-center justify-center"
       >
-        {/*  Image  */}
+        {/* Circular Image Container */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
             transition: { duration: 0.5, delay: 2.4, ease: "easeInOut" },
           }}
-          className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-difference absolute"
+          className="w-[270px] h-[270px] xl:w-[460px] xl:h-[460px] rounded-full overflow-hidden absolute z-10 shadow-2xl"
         >
           <Image
-            src="/assets/main.png"
+            src="/assets/main.jpg"
             priority
             quality={100}
             fill
-            alt=""
-            className="object-contain"
+            alt="Reza Mohamadnia"
+            className="object-cover"
           />
         </motion.div>
-        {/* Circle */}
+
+        {/* Animated Outer Circle */}
         <motion.svg
-          className="w-[300px] xl:w-[506px] h-[300px] xl:h-[506px] "
+          className="w-[300px] xl:w-[506px] h-[300px] xl:h-[506px]"
           fill="transparent"
           viewBox="0 0 506 506"
           xmlns="http://www.w3.org/2000/svg"
