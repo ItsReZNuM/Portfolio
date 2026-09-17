@@ -18,8 +18,9 @@
     "close": "Close"
   },
   "switcher": {
-    "en": "EN",
-    "fa": "فا",
-    "ariaLabel": "Switch language"
+    "current": "English",
+    "en": "English",
+    "fa": "Persian",
+    "ariaLabel": "Select language"
   }
 }

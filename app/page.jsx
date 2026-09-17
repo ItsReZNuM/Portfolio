@@ -20,7 +20,11 @@ const Home = () => {
             <h1 className="h1 mb-6">
               {t("home.greeting", "Hello, I'm")} <br />
               <span className="text-accent">{t("home.name", "Reza Mohamadnia")}</span>
-              {t("home.suffix") ? ` ${t("home.suffix")}` : ""}
+              {t("home.suffix") ? (
+                <span className="block text-2xl xl:text-3xl font-medium text-white/90 mt-2">
+                  {t("home.suffix")}
+                </span>
+              ) : null}
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80 leading-relaxed">
               {t(
