@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Check } from "lucide-react";
 
 // Crisp SVG Vector Flag for United Kingdom
 export function UKFlag({ className = "w-5 h-3.5" }) {
@@ -59,119 +58,27 @@ export function IranFlag({ className = "w-5 h-3.5" }) {
   );
 }
 
-export default function LanguageSwitcher({ className, dropUp = false }) {
-  const { locale, setLocale, t } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+export default function LanguageSwitcher({ className }) {
+  const { locale, toggleLocale, t } = useLanguage();
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
-  const selectLanguage = (newLocale) => {
-    setLocale(newLocale, true);
-    setIsOpen(false);
-  };
-
-  const languages = [
-    {
-      code: "en",
-      label: t("common.switcher.en", "English"),
-      flag: <UKFlag className="w-5 h-3.5" />,
-    },
-    {
-      code: "fa",
-      label: t("common.switcher.fa", "Persian"),
-      flag: <IranFlag className="w-5 h-3.5" />,
-    },
-  ];
-
-  const currentLanguage =
-    locale === "fa"
-      ? {
-        label: t("common.switcher.fa", "فارسی"),
-        flag: <IranFlag className="w-5 h-3.5" />,
-      }
-      : {
-        label: t("common.switcher.en", "English"),
-        flag: <UKFlag className="w-5 h-3.5" />,
-      };
+  const isFarsi = locale === "fa";
 
   return (
-    <div className={cn("relative inline-block text-start", className)} ref={dropdownRef}>
-      {/* Trigger Button */}
-      <button
-        type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        aria-label={t("common.switcher.ariaLabel", "Select language")}
-        className="inline-flex items-center justify-between w-[115px] px-3.5 py-1.5 rounded-full bg-[#27272c] hover:bg-[#2e2e35] border border-white/10 hover:border-accent/40 text-white text-sm font-medium transition-all duration-300 shadow-sm cursor-pointer select-none"
-      >
-        <span className="flex items-center">{currentLanguage.flag}</span>
-        <span className="leading-none text-xs xl:text-sm">{currentLanguage.label}</span>
-        <ChevronDown
-          className={cn(
-            "w-3.5 h-3.5 text-accent transition-transform duration-300",
-            isOpen && "rotate-180"
-          )}
-        />
-      </button>
-
-      {/* Dropdown Menu */}
-      {isOpen && (
-        <div
-          role="listbox"
-          aria-label={t("common.switcher.ariaLabel", "Select language")}
-          className={cn(
-            "absolute end-0 z-50 min-w-[155px] p-1.5 rounded-xl bg-[#2a2a2e] border border-white/10 shadow-2xl backdrop-blur-md animate-in fade-in-0 zoom-in-95 duration-200",
-            dropUp ? "bottom-full mb-2" : "top-full mt-2"
-          )}
-        >
-          {languages.map((lang) => {
-            const isSelected = locale === lang.code;
-            return (
-              <button
-                key={lang.code}
-                role="option"
-                aria-selected={isSelected}
-                type="button"
-                onClick={() => selectLanguage(lang.code)}
-                className={cn(
-                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-xs xl:text-sm transition-all duration-200 cursor-pointer select-none",
-                  isSelected
-                    ? "bg-accent/15 text-accent font-semibold"
-                    : "text-white/80 hover:bg-white/5 hover:text-white"
-                )}
-              >
-                <div className="flex items-center gap-2.5">
-                  {lang.flag}
-                  <span>{lang.label}</span>
-                </div>
-                {isSelected && <Check className="w-3.5 h-3.5 text-accent shrink-0" />}
-              </button>
-            );
-          })}
-        </div>
+    <button
+      type="button"
+      onClick={toggleLocale}
+      aria-label={t("common.switcher.ariaLabel", "Toggle language")}
+      className={cn(
+        "inline-flex items-center justify-center gap-3 xl:gap-3.5 min-w-[96px] xl:min-w-[104px] px-3.5 py-1.5 rounded-full bg-[#27272c] hover:bg-[#2e2e35] border border-white/10 hover:border-accent/40 text-white text-sm font-medium transition-all duration-300 shadow-sm cursor-pointer select-none active:scale-95",
+        className
       )}
-    </div>
+    >
+      <span className="flex items-center">
+        {isFarsi ? <IranFlag className="w-5 h-3.5" /> : <UKFlag className="w-5 h-3.5" />}
+      </span>
+      <span className="leading-none text-xs xl:text-sm font-medium">
+        {isFarsi ? "فارسی" : "English"}
+      </span>
+    </button>
   );
 }

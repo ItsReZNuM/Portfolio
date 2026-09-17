@@ -10,19 +10,12 @@ const Photo = () => {
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
+          transition: { duration: 0.5, ease: "easeInOut" },
         }}
         className="relative flex items-center justify-center w-[300px] h-[300px] xl:w-[506px] xl:h-[506px]"
       >
         {/* Circular Image Container */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 0.4, delay: 0.4, ease: "easeInOut" },
-          }}
-          className="w-[270px] h-[270px] xl:w-[460px] xl:h-[460px] rounded-full overflow-hidden absolute z-10 shadow-2xl"
-        >
+        <div className="w-[270px] h-[270px] xl:w-[460px] xl:h-[460px] rounded-full overflow-hidden absolute z-10 shadow-2xl">
           <Image
             src="/assets/main.webp"
             priority
@@ -31,7 +24,7 @@ const Photo = () => {
             alt="Reza Mohamadnia"
             className="object-cover"
           />
-        </motion.div>
+        </div>
 
         {/* Animated Outer Circle */}
         <motion.svg

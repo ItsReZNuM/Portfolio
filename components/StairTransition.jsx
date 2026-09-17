@@ -33,11 +33,11 @@ const StairTransition = () => {
         </div>
 
         <motion.div
-          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
+          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none z-30"
           initial={{ opacity: 1 }}
           animate={{
             opacity: 0,
-            transition: { delay: 0.6, duration: 0.3, ease: "easeInOut" },
+            transition: { delay: 0.9, duration: 0.4, ease: "easeInOut" },
           }}
         />
       </div>

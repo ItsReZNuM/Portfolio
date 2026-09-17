@@ -78,7 +78,7 @@ const MobileNav = () => {
 
         {/* Mobile drawer footer switcher - bottom position lifted up by several pixels */}
         <div className="flex justify-center items-center pb-14">
-          <LanguageSwitcher dropUp />
+          <LanguageSwitcher />
         </div>
       </SheetContent>
     </Sheet>
