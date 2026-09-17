@@ -107,13 +107,13 @@ export default function LanguageSwitcher({ className }) {
   const currentLanguage =
     locale === "fa"
       ? {
-          label: t("common.switcher.fa", "فارسی"),
-          flag: <IranFlag className="w-5 h-3.5" />,
-        }
+        label: t("common.switcher.fa", "فارسی"),
+        flag: <IranFlag className="w-5 h-3.5" />,
+      }
       : {
-          label: t("common.switcher.en", "English"),
-          flag: <UKFlag className="w-5 h-3.5" />,
-        };
+        label: t("common.switcher.en", "English"),
+        flag: <UKFlag className="w-5 h-3.5" />,
+      };
 
   return (
     <div className={cn("relative inline-block text-start", className)} ref={dropdownRef}>

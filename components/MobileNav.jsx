@@ -46,10 +46,10 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent
         side={isRTL ? "left" : "right"}
-        className="flex flex-col justify-between py-12 px-8"
+        className="flex flex-col justify-start items-center py-10 px-8 overflow-y-auto"
       >
         {/* Logo */}
-        <div className="mt-20 text-center text-2xl">
+        <div className="mt-8 mb-10 text-center text-2xl">
           <Link href="/" onClick={() => setIsOpen(false)}>
             <h1 className="text-4xl font-semibold">
               Reza<span className="text-accent">.</span>
@@ -58,7 +58,7 @@ const MobileNav = () => {
         </div>
 
         {/* Nav Links */}
-        <nav className="flex flex-col justify-center items-center gap-8">
+        <nav className="flex flex-col justify-center items-center gap-6 mb-8">
           {links.map((link, index) => {
             const isActive = link.path === pathname;
             return (
@@ -76,8 +76,8 @@ const MobileNav = () => {
           })}
         </nav>
 
-        {/* Mobile drawer footer switcher */}
-        <div className="flex justify-center items-center pb-6">
+        {/* Language Switcher comfortably positioned below links */}
+        <div className="flex justify-center items-center mt-2 mb-10">
           <LanguageSwitcher />
         </div>
       </SheetContent>
