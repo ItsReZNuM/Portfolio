@@ -66,7 +66,13 @@ function getSnapshot() {
   if (typeof window === "undefined") return "en";
   try {
     const saved = localStorage.getItem("portfolio_lang");
-    return saved === "fa" ? "fa" : "en";
+    if (saved === "fa" || saved === "en") return saved;
+
+    // Fast initial check on first visit before network IP query finishes
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz === "Asia/Tehran") return "fa";
+
+    return "en";
   } catch {
     return "en";
   }
@@ -88,10 +94,13 @@ export function LanguageProvider({ children }) {
     document.title = locale === "fa" ? "رضا محمدنیا" : "Reza Mohamadnia";
   }, [locale, dir]);
 
-  const setLocale = useCallback((newLocale) => {
+  const setLocale = useCallback((newLocale, isManual = false) => {
     if (newLocale !== "en" && newLocale !== "fa") return;
     try {
       localStorage.setItem("portfolio_lang", newLocale);
+      if (isManual) {
+        localStorage.setItem("portfolio_lang_manual", "true");
+      }
       document.documentElement.lang = newLocale;
       document.documentElement.dir = newLocale === "fa" ? "rtl" : "ltr";
       document.title = newLocale === "fa" ? "رضا محمدنیا" : "Reza Mohamadnia";
@@ -101,8 +110,78 @@ export function LanguageProvider({ children }) {
     }
   }, []);
 
+  // Automatic IP-based geolocation detection on initial visit
+  useEffect(() => {
+    try {
+      const manualSelection = localStorage.getItem("portfolio_lang_manual");
+      if (manualSelection) {
+        // User has already made an explicit manual choice, do not override
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
+    async function detectGeoCountry() {
+      let detectedCountry = null;
+
+      // 1. Try internal edge API endpoint (Vercel / Cloudflare headers)
+      try {
+        const res = await fetch("/api/geo");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.country) {
+            detectedCountry = data.country.toUpperCase();
+          }
+        }
+      } catch {
+        // Internal endpoint failed, proceed to external fallback
+      }
+
+      // 2. Fallback to lightweight public GeoIP lookup if edge header not present
+      if (!detectedCountry) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+          const res = await fetch("https://ipapi.co/json/", {
+            signal: controller.signal,
+          });
+          clearTimeout(timeoutId);
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.country_code) {
+              detectedCountry = data.country_code.toUpperCase();
+            }
+          }
+        } catch {
+          // Public GeoIP timed out or failed
+        }
+      }
+
+      // 3. Fallback to timezone if IP lookup didn't succeed
+      if (!detectedCountry) {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          detectedCountry = tz === "Asia/Tehran" ? "IR" : "OTHER";
+        } catch {
+          detectedCountry = "OTHER";
+        }
+      }
+
+      // Apply detected language: Iran -> fa, Any other country -> en
+      const targetLocale = detectedCountry === "IR" ? "fa" : "en";
+      if (targetLocale !== locale) {
+        setLocale(targetLocale, false);
+      }
+    }
+
+    detectGeoCountry();
+  }, [locale, setLocale]);
+
   const toggleLocale = useCallback(() => {
-    setLocale(locale === "en" ? "fa" : "en");
+    setLocale(locale === "en" ? "fa" : "en", true);
   }, [locale, setLocale]);
 
   // Nested translation resolver

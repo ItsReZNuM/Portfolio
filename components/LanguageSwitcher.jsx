@@ -87,7 +87,7 @@ export default function LanguageSwitcher({ className }) {
   }, []);
 
   const selectLanguage = (newLocale) => {
-    setLocale(newLocale);
+    setLocale(newLocale, true);
     setIsOpen(false);
   };
 
