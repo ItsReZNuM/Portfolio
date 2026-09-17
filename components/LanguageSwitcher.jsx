@@ -59,7 +59,7 @@ export function IranFlag({ className = "w-5 h-3.5" }) {
   );
 }
 
-export default function LanguageSwitcher({ className }) {
+export default function LanguageSwitcher({ className, dropUp = false }) {
   const { locale, setLocale, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -141,7 +141,10 @@ export default function LanguageSwitcher({ className }) {
         <div
           role="listbox"
           aria-label={t("common.switcher.ariaLabel", "Select language")}
-          className="absolute top-full mt-2 end-0 z-50 min-w-[155px] p-1.5 rounded-xl bg-[#2a2a2e] border border-white/10 shadow-2xl backdrop-blur-md animate-in fade-in-0 zoom-in-95 duration-200"
+          className={cn(
+            "absolute end-0 z-50 min-w-[155px] p-1.5 rounded-xl bg-[#2a2a2e] border border-white/10 shadow-2xl backdrop-blur-md animate-in fade-in-0 zoom-in-95 duration-200",
+            dropUp ? "bottom-full mb-2" : "top-full mt-2"
+          )}
         >
           {languages.map((lang) => {
             const isSelected = locale === lang.code;
