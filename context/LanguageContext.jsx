@@ -113,67 +113,53 @@ export function LanguageProvider({ children }) {
   // Automatic IP-based geolocation detection on initial visit
   useEffect(() => {
     try {
+      const saved = localStorage.getItem("portfolio_lang");
+      if (saved) {
+        // User already has a language saved, do not override
+        return;
+      }
       const manualSelection = localStorage.getItem("portfolio_lang_manual");
       if (manualSelection) {
-        // User has already made an explicit manual choice, do not override
         return;
       }
     } catch {
       // ignore
     }
 
-    async function detectGeoCountry() {
-      let detectedCountry = null;
+    // 1. Instant synchronous timezone detection - 0ms, zero network calls
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (tz === "Asia/Tehran") {
+        if (locale !== "fa") {
+          setLocale("fa", false);
+        }
+        return;
+      }
+    } catch {
+      // ignore
+    }
 
-      // 1. Try internal edge API endpoint (Vercel / Cloudflare headers)
+    // 2. Try internal edge API endpoint (Vercel / Cloudflare headers)
+    async function detectGeoCountry() {
       try {
-        const res = await fetch("/api/geo");
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 800);
+
+        const res = await fetch("/api/geo", { signal: controller.signal });
+        clearTimeout(timeoutId);
+
         if (res.ok) {
           const data = await res.json();
           if (data.country) {
-            detectedCountry = data.country.toUpperCase();
+            const detectedCountry = data.country.toUpperCase();
+            const targetLocale = detectedCountry === "IR" ? "fa" : "en";
+            if (targetLocale !== locale) {
+              setLocale(targetLocale, false);
+            }
           }
         }
       } catch {
-        // Internal endpoint failed, proceed to external fallback
-      }
-
-      // 2. Fallback to lightweight public GeoIP lookup if edge header not present
-      if (!detectedCountry) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 2500);
-
-          const res = await fetch("https://ipapi.co/json/", {
-            signal: controller.signal,
-          });
-          clearTimeout(timeoutId);
-
-          if (res.ok) {
-            const data = await res.json();
-            if (data.country_code) {
-              detectedCountry = data.country_code.toUpperCase();
-            }
-          }
-        } catch {
-          // Public GeoIP timed out or failed
-        }
-      }
-
-      // 3. Fallback to timezone if IP lookup didn't succeed
-      if (!detectedCountry) {
-        try {
-          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          detectedCountry = tz === "Asia/Tehran" ? "IR" : "OTHER";
-        } catch {
-          detectedCountry = "OTHER";
-        }
-      }
-
-      // Apply detected language: Iran -> fa, Any other country -> en
-      const targetLocale = detectedCountry === "IR" ? "fa" : "en";
-      if (targetLocale !== locale) {
-        setLocale(targetLocale, false);
+        // Fast exit on failure/abort without hanging
       }
     }
 

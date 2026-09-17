@@ -39,8 +39,8 @@ const Nav = () => {
           <Link
             href={link.path}
             key={index}
-            className={`${
-              isActive && "text-accent border-b-2 border-accent"
+            className={`border-b-2 ${
+              isActive ? "text-accent border-accent" : "border-transparent text-white"
             } capitalize font-medium hover:text-accent transition-all pb-1`}
           >
             {t(`common.nav.${link.name}`, link.name)}

@@ -17,7 +17,7 @@ const Home = () => {
           {/* Text */}
           <div className="text-center xl:text-start order-2 xl:order-none">
             <span className="text-xl text-white/80">{t("home.role", "BackEnd Developer")}</span>
-            <h1 className="h1 mb-6">
+            <h1 className="h1 mb-6 min-h-[130px] xl:min-h-[175px]">
               {t("home.greeting", "Hello, I'm")} <br />
               <span className="text-accent">{t("home.name", "Reza Mohamadnia")}</span>
               {t("home.suffix") ? (
@@ -56,7 +56,7 @@ const Home = () => {
           </div>
 
           {/* Photo */}
-          <div className="order-1 xl:order-none mb-8 xl:mb-0">
+          <div className="order-1 xl:order-none mb-8 xl:mb-0 w-[300px] h-[300px] xl:w-[506px] xl:h-[506px] shrink-0">
             <Photo />
           </div>
         </div>

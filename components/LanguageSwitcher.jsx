@@ -124,7 +124,7 @@ export default function LanguageSwitcher({ className, dropUp = false }) {
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label={t("common.switcher.ariaLabel", "Select language")}
-        className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#27272c] hover:bg-[#2e2e35] border border-white/10 hover:border-accent/40 text-white text-sm font-medium transition-all duration-300 shadow-sm cursor-pointer select-none"
+        className="inline-flex items-center justify-between w-[115px] px-3.5 py-1.5 rounded-full bg-[#27272c] hover:bg-[#2e2e35] border border-white/10 hover:border-accent/40 text-white text-sm font-medium transition-all duration-300 shadow-sm cursor-pointer select-none"
       >
         <span className="flex items-center">{currentLanguage.flag}</span>
         <span className="leading-none text-xs xl:text-sm">{currentLanguage.label}</span>
