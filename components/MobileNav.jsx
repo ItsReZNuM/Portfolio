@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -32,20 +33,24 @@ const links = [
 
 const MobileNav = () => {
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger
-        className="flex justify-center items-center p-2 rounded-md hover:bg-white/5 transition-colors"
+        className="flex justify-center items-center p-2 rounded-md hover:bg-white/5 transition-colors cursor-pointer"
         aria-label="Toggle menu"
       >
         <CiMenuFries className="text-[32px] text-accent" />
       </SheetTrigger>
-      <SheetContent className="flex flex-col justify-between py-12 px-8">
+      <SheetContent
+        side={isRTL ? "left" : "right"}
+        className="flex flex-col justify-between py-12 px-8"
+      >
         {/* Logo */}
         <div className="mt-20 text-center text-2xl">
-          <Link href="/">
+          <Link href="/" onClick={() => setIsOpen(false)}>
             <h1 className="text-4xl font-semibold">
               Reza<span className="text-accent">.</span>
             </h1>
@@ -60,6 +65,7 @@ const MobileNav = () => {
               <Link
                 href={link.path}
                 key={index}
+                onClick={() => setIsOpen(false)}
                 className={`${
                   isActive && "text-accent border-b-2 border-accent"
                 } text-xl capitalize hover:text-accent transition-all pb-1`}
