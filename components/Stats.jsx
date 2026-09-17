@@ -38,8 +38,8 @@ const Stats = () => {
                 <CountUp
                   key={`${locale}-${item.num}`}
                   end={item.num}
-                  duration={3}
-                  delay={1.5}
+                  duration={2}
+                  delay={0.2}
                   formattingFn={(value) =>
                     locale === "fa" ? toPersianDigits(value) : value
                   }

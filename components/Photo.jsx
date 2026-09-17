@@ -10,24 +10,24 @@ const Photo = () => {
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          transition: { duration: 0.5, delay: 2, ease: "easeIn" },
+          transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
         }}
-        className="relative flex items-center justify-center"
+        className="relative flex items-center justify-center w-[300px] h-[300px] xl:w-[506px] xl:h-[506px]"
       >
         {/* Circular Image Container */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            transition: { duration: 0.5, delay: 2.4, ease: "easeInOut" },
+            transition: { duration: 0.4, delay: 0.4, ease: "easeInOut" },
           }}
           className="w-[270px] h-[270px] xl:w-[460px] xl:h-[460px] rounded-full overflow-hidden absolute z-10 shadow-2xl"
         >
           <Image
-            src="/assets/main.jpg"
+            src="/assets/main.webp"
             priority
-            quality={100}
             fill
+            sizes="(max-width: 1200px) 270px, 460px"
             alt="Reza Mohamadnia"
             className="object-cover"
           />
