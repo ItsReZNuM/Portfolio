@@ -8,13 +8,13 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/context/LanguageContext";
 
 const Header = () => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <header className="py-8 xl:py-12 text-white">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link href="/">
+        <Link href={`/?lang=${locale}`}>
           <h1 className="text-4xl font-semibold">
             Reza<span className="text-accent">.</span>
           </h1>
@@ -24,7 +24,7 @@ const Header = () => {
         <div className="hidden xl:flex items-center gap-6">
           <Nav />
           <LanguageSwitcher />
-          <Link href="/contact">
+          <Link href={`/contact?lang=${locale}`}>
             <Button>{t("common.actions.hireMe", "Hire Me")}</Button>
           </Link>
         </div>

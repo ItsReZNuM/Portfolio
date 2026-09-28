@@ -46,24 +46,135 @@ const estedad = localFont({
 });
 
 export const metadata = {
-  title: "Reza Mohamadnia",
-  description: "Portfolio of Reza Mohamadnia, BackEnd Developer specializing in Python, Django, FastAPI, and Database Architecture.",
-  keywords: ["Backend Developer", "Python", "Django", "FastAPI", "Reza Mohamadnia", "رضا محمدنیا"],
-  authors: [{ name: "Reza Mohamadnia" }],
+  metadataBase: new URL("https://reznum.ir"),
+  title: {
+    default: "رضا محمدنیا | توسعه‌دهنده بک‌اند (Reza Mohamadnia)",
+    template: "%s | رضا محمدنیا",
+  },
+  description:
+    "وب‌سایت رسمی و پورتفولیوی رضا محمدنیا (Reza Mohamadnia - RezNum)؛ برنامه‌نویس و توسعه‌دهنده ارشد بک‌اند با تخصص در Python، Django، FastAPI و معماری پایگاه داده.",
+  keywords: [
+    "رضا محمدنیا",
+    "Reza Mohamadnia",
+    "محمدنیا",
+    "Mohamadnia",
+    "RezNum",
+    "reznum.ir",
+    "توسعه‌دهنده بک‌اند",
+    "Backend Developer",
+    "برنامه‌نویس پایتون",
+    "Python Developer",
+    "برنامه‌نویس جنگو",
+    "Django Developer",
+    "FastAPI",
+    "پایتون",
+    "جنگو",
+  ],
+  authors: [{ name: "رضا محمدنیا (Reza Mohamadnia)", url: "https://reznum.ir" }],
+  creator: "Reza Mohamadnia",
+  publisher: "Reza Mohamadnia",
+  alternates: {
+    canonical: "https://reznum.ir",
+    languages: {
+      fa: "https://reznum.ir/?lang=fa",
+      en: "https://reznum.ir/?lang=en",
+      "x-default": "https://reznum.ir",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "fa_IR",
+    alternateLocale: ["en_US"],
+    url: "https://reznum.ir",
+    siteName: "رضا محمدنیا | Reza Mohamadnia",
+    title: "رضا محمدنیا | توسعه‌دهنده بک‌اند (Reza Mohamadnia)",
+    description:
+      "وب‌سایت رسمی و پورتفولیوی رضا محمدنیا (RezNum)؛ توسعه‌دهنده بک‌اند با تخصص در Python، Django، FastAPI و معماری دیتابیس.",
+    images: [
+      {
+        url: "/assets/main.webp",
+        width: 800,
+        height: 800,
+        alt: "رضا محمدنیا | Reza Mohamadnia",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "رضا محمدنیا | Reza Mohamadnia",
+    description:
+      "وب‌سایت رسمی و نمونه‌کارهای رضا محمدنیا - برنامه‌نویس و توسعه‌دهنده ارشد بک‌اند",
+    images: ["/assets/main.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+const jsonLdPerson = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "رضا محمدنیا",
+  alternateName: ["Reza Mohamadnia", "RezNum", "Mohamadnia"],
+  url: "https://reznum.ir",
+  image: "https://reznum.ir/assets/main.webp",
+  jobTitle: "Backend Developer",
+  description:
+    "توسعه‌دهنده ارشد بک‌اند متخصص در پایتون، جنگو، فست‌ای‌پی‌آی و معماری پایگاه داده.",
+  sameAs: [
+    "https://github.com/ItsReZNuM",
+    "https://linkedin.com/in/reznum",
+    "https://t.me/itsreznum",
+  ],
+  knowsAbout: [
+    "Python",
+    "Django",
+    "FastAPI",
+    "PostgreSQL",
+    "Docker",
+    "Redis",
+    "REST API",
+    "Backend Architecture",
+  ],
+};
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "رضا محمدنیا | Reza Mohamadnia",
+  alternateName: ["RezNum Portfolio", "پورتفولیوی رضا محمدنیا"],
+  url: "https://reznum.ir",
+  inLanguage: ["fa", "en"],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
-      dir="ltr"
+      lang="fa"
+      dir="rtl"
       className={`${jetbrains.variable} ${estedad.variable}`}
       suppressHydrationWarning
     >
       <head>
         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var l=localStorage.getItem('portfolio_lang');if(!l){var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;if(tz==='Asia/Tehran')l='fa';}if(l==='fa'){document.documentElement.lang='fa';document.documentElement.dir='rtl';document.title='رضا محمدنیا';}else{document.documentElement.lang='en';document.documentElement.dir='ltr';document.title='Reza Mohamadnia';}}catch(e){}})();`,
+            __html: `(function(){try{var p=new URLSearchParams(window.location.search);var q=p.get('lang');var l=(q==='fa'||q==='en')?q:localStorage.getItem('portfolio_lang');if(l==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';document.title='Reza Mohamadnia | BackEnd Developer';}else{document.documentElement.lang='fa';document.documentElement.dir='rtl';document.title='رضا محمدنیا | توسعه‌دهنده بک‌اند (Reza Mohamadnia)';}}catch(e){}})();`,
           }}
         />
       </head>

@@ -29,7 +29,7 @@ const links = [
 
 const Nav = () => {
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <nav className="flex items-center gap-8">
@@ -37,7 +37,7 @@ const Nav = () => {
         const isActive = link.path === pathname;
         return (
           <Link
-            href={link.path}
+            href={`${link.path}?lang=${locale}`}
             key={index}
             className={`border-b-2 ${
               isActive ? "text-accent border-accent" : "border-transparent text-white"

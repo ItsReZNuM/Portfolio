@@ -33,7 +33,7 @@ const links = [
 
 const MobileNav = () => {
   const pathname = usePathname();
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, locale } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -50,7 +50,7 @@ const MobileNav = () => {
       >
         {/* Logo */}
         <div className="mt-16 text-center text-2xl">
-          <Link href="/" onClick={() => setIsOpen(false)}>
+          <Link href={`/?lang=${locale}`} onClick={() => setIsOpen(false)}>
             <h1 className="text-4xl font-semibold">
               Reza<span className="text-accent">.</span>
             </h1>
@@ -63,7 +63,7 @@ const MobileNav = () => {
             const isActive = link.path === pathname;
             return (
               <Link
-                href={link.path}
+                href={`${link.path}?lang=${locale}`}
                 key={index}
                 onClick={() => setIsOpen(false)}
                 className={`${

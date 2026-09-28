@@ -51,35 +51,42 @@ export const toPersianDigits = (num) => {
   return num.toString().replace(/\d/g, (d) => farsiDigits[Number(d)]);
 };
 
-// External store subscription for localStorage synchronization
+// External store subscription for localStorage & URL synchronization
 function subscribe(callback) {
   if (typeof window === "undefined") return () => {};
   window.addEventListener("storage", callback);
   window.addEventListener("portfolio_lang_change", callback);
+  window.addEventListener("popstate", callback);
   return () => {
     window.removeEventListener("storage", callback);
     window.removeEventListener("portfolio_lang_change", callback);
+    window.removeEventListener("popstate", callback);
   };
 }
 
 function getSnapshot() {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "fa";
   try {
+    // 1. URL query param ?lang=fa or ?lang=en has highest priority
+    const params = new URLSearchParams(window.location.search);
+    const qLang = params.get("lang");
+    if (qLang === "fa" || qLang === "en") {
+      return qLang;
+    }
+
+    // 2. Saved user preference in localStorage
     const saved = localStorage.getItem("portfolio_lang");
     if (saved === "fa" || saved === "en") return saved;
 
-    // Fast initial check on first visit before network IP query finishes
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (tz === "Asia/Tehran") return "fa";
-
-    return "en";
+    // 3. Default language is Persian ("fa") for all visitors (no geo restrictions!)
+    return "fa";
   } catch {
-    return "en";
+    return "fa";
   }
 }
 
 function getServerSnapshot() {
-  return "en";
+  return "fa"; // Default SSR / Static Generation is Persian!
 }
 
 export function LanguageProvider({ children }) {
@@ -87,87 +94,53 @@ export function LanguageProvider({ children }) {
   const dir = locale === "fa" ? "rtl" : "ltr";
   const isRTL = locale === "fa";
 
-  // Synchronize document attributes and title whenever locale changes
-  useEffect(() => {
-    document.documentElement.lang = locale;
-    document.documentElement.dir = dir;
-    document.title = locale === "fa" ? "رضا محمدنیا" : "Reza Mohamadnia";
-  }, [locale, dir]);
-
-  const setLocale = useCallback((newLocale, isManual = false) => {
+  const setLocale = useCallback((newLocale) => {
     if (newLocale !== "en" && newLocale !== "fa") return;
     try {
       localStorage.setItem("portfolio_lang", newLocale);
-      if (isManual) {
-        localStorage.setItem("portfolio_lang_manual", "true");
-      }
       document.documentElement.lang = newLocale;
       document.documentElement.dir = newLocale === "fa" ? "rtl" : "ltr";
-      document.title = newLocale === "fa" ? "رضا محمدنیا" : "Reza Mohamadnia";
+      document.title =
+        newLocale === "fa"
+          ? "رضا محمدنیا | توسعه‌دهنده بک‌اند (Reza Mohamadnia)"
+          : "Reza Mohamadnia | BackEnd Developer";
+
+      // Update URL query param ?lang=... without full page reload
+      if (typeof window !== "undefined") {
+        const url = new URL(window.location.href);
+        url.searchParams.set("lang", newLocale);
+        window.history.pushState({}, "", url.toString());
+      }
+
       window.dispatchEvent(new Event("portfolio_lang_change"));
     } catch {
       // Handle storage exception
     }
   }, []);
 
-  // Automatic IP-based geolocation detection on initial visit
+  // Synchronize document attributes, title, and URL parameter whenever locale changes
   useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = dir;
+    document.title =
+      locale === "fa"
+        ? "رضا محمدنیا | توسعه‌دهنده بک‌اند (Reza Mohamadnia)"
+        : "Reza Mohamadnia | BackEnd Developer";
+
     try {
-      const saved = localStorage.getItem("portfolio_lang");
-      if (saved) {
-        // User already has a language saved, do not override
-        return;
-      }
-      const manualSelection = localStorage.getItem("portfolio_lang_manual");
-      if (manualSelection) {
-        return;
-      }
-    } catch {
-      // ignore
-    }
-
-    // 1. Instant synchronous timezone detection - 0ms, zero network calls
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (tz === "Asia/Tehran") {
-        if (locale !== "fa") {
-          setLocale("fa", false);
+      localStorage.setItem("portfolio_lang", locale);
+      if (typeof window !== "undefined") {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get("lang") !== locale) {
+          url.searchParams.set("lang", locale);
+          window.history.replaceState({}, "", url.toString());
         }
-        return;
       }
-    } catch {
-      // ignore
-    }
-
-    // 2. Try internal edge API endpoint (Vercel / Cloudflare headers)
-    async function detectGeoCountry() {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 800);
-
-        const res = await fetch("/api/geo", { signal: controller.signal });
-        clearTimeout(timeoutId);
-
-        if (res.ok) {
-          const data = await res.json();
-          if (data.country) {
-            const detectedCountry = data.country.toUpperCase();
-            const targetLocale = detectedCountry === "IR" ? "fa" : "en";
-            if (targetLocale !== locale) {
-              setLocale(targetLocale, false);
-            }
-          }
-        }
-      } catch {
-        // Fast exit on failure/abort without hanging
-      }
-    }
-
-    detectGeoCountry();
-  }, [locale, setLocale]);
+    } catch {}
+  }, [locale, dir]);
 
   const toggleLocale = useCallback(() => {
-    setLocale(locale === "en" ? "fa" : "en", true);
+    setLocale(locale === "en" ? "fa" : "en");
   }, [locale, setLocale]);
 
   // Nested translation resolver
