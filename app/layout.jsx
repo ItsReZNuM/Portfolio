@@ -117,6 +117,22 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icons/R_logo_16x16.svg", sizes: "16x16", type: "image/svg+xml" },
+      { url: "/icons/R_logo_32x32.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/icons/R_logo_48x48.svg", sizes: "48x48", type: "image/svg+xml" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/icons/R_logo_180x180.svg", sizes: "180x180", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+  },
 };
 
 const jsonLdPerson = {
