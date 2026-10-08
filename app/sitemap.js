@@ -1,31 +1,24 @@
 export default function sitemap() {
   const baseUrl = "https://reznum.ir";
-  const routes = ["", "/services", "/resume", "/work", "/contact"];
+  const routes = [
+    { path: "", priority: 1.0, changeFrequency: "weekly" },
+    { path: "/services", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/resume", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/work", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+  ];
 
-  return routes.flatMap((route) => [
-    {
-      url: `${baseUrl}${route}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: route === "" ? 1.0 : 0.8,
-      alternates: {
-        languages: {
-          fa: `${baseUrl}${route}?lang=fa`,
-          en: `${baseUrl}${route}?lang=en`,
-        },
+  return routes.map((route) => ({
+    url: `${baseUrl}${route.path}`,
+    lastModified: new Date(),
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+    alternates: {
+      languages: {
+        fa: `${baseUrl}${route.path}`,
+        en: `${baseUrl}${route.path}?lang=en`,
+        "x-default": `${baseUrl}${route.path}`,
       },
     },
-    {
-      url: `${baseUrl}${route}?lang=fa`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: route === "" ? 0.9 : 0.7,
-    },
-    {
-      url: `${baseUrl}${route}?lang=en`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: route === "" ? 0.9 : 0.7,
-    },
-  ]);
+  }));
 }

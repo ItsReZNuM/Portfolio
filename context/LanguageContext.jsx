@@ -108,7 +108,11 @@ export function LanguageProvider({ children }) {
       // Update URL query param ?lang=... without full page reload
       if (typeof window !== "undefined") {
         const url = new URL(window.location.href);
-        url.searchParams.set("lang", newLocale);
+        if (newLocale === "en") {
+          url.searchParams.set("lang", "en");
+        } else {
+          url.searchParams.delete("lang");
+        }
         window.history.pushState({}, "", url.toString());
       }
 
@@ -131,8 +135,12 @@ export function LanguageProvider({ children }) {
       localStorage.setItem("portfolio_lang", locale);
       if (typeof window !== "undefined") {
         const url = new URL(window.location.href);
-        if (url.searchParams.get("lang") !== locale) {
-          url.searchParams.set("lang", locale);
+        if (url.searchParams.has("lang") && url.searchParams.get("lang") !== locale) {
+          if (locale === "en") {
+            url.searchParams.set("lang", "en");
+          } else {
+            url.searchParams.delete("lang");
+          }
           window.history.replaceState({}, "", url.toString());
         }
       }

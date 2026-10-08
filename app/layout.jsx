@@ -76,7 +76,7 @@ export const metadata = {
   alternates: {
     canonical: "https://reznum.ir",
     languages: {
-      fa: "https://reznum.ir/?lang=fa",
+      fa: "https://reznum.ir",
       en: "https://reznum.ir/?lang=en",
       "x-default": "https://reznum.ir",
     },
